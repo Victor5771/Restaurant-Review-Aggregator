@@ -33,3 +33,9 @@ class Customer:
         cursor = self.conn.cursor()
         cursor.execute('DELETE FROM reviews WHERE customer_id=? AND restaurant_id=?', (self.id, restaurant.id))
         self.conn.commit()
+
+    def save(self):
+        cursor = self.conn.cursor()
+        cursor.execute('INSERT INTO customers (first_name, last_name) VALUES (?, ?)',
+                       (self.first_name, self.last_name))
+        self.conn.commit()
