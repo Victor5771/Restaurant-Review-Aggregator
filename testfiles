@@ -1,0 +1,27 @@
+1.Retrieve customers with their reviews:
+    SELECT c.id AS "Customer ID", c.first_name AS "First Name", c.last_name AS "Last Name",
+       r.id AS "Review ID", r.star_rating AS "Star Rating", r.restaurant_id AS "Restaurant ID"
+FROM customers c
+JOIN reviews r ON c.id = r.customer_id;
+ 
+2.Retrieve restaurants with their reviews:
+     SELECT r.id AS "Restaurant ID", r.name AS "Restaurant Name", r.price AS "Price",
+       rv.id AS "Review ID", rv.star_rating AS "Star Rating", rv.customer_id AS "Customer ID"
+FROM restaurants r
+JOIN reviews rv ON r.id = rv.restaurant_id;
+
+3.Retrieve specific customer's reviews:
+   SELECT c.id AS "Customer ID", c.first_name AS "First Name", c.last_name AS "Last Name",
+       r.star_rating AS "Star Rating", res.name AS "Restaurant Name"
+FROM customers c
+JOIN reviews r ON c.id = r.customer_id
+JOIN restaurants res ON r.restaurant_id = res.id
+WHERE c.id = <customer_id>;
+
+4.Retrieve specific restaurant's reviews:
+  SELECT res.id AS "Restaurant ID", res.name AS "Restaurant Name", res.price AS "Price",
+       rv.star_rating AS "Star Rating", c.first_name AS "Customer First Name", c.last_name AS "Customer Last Name"
+FROM restaurants res
+JOIN reviews rv ON res.id = rv.restaurant_id
+JOIN customers c ON rv.customer_id = c.id
+WHERE res.id = <restaurant_id>;
